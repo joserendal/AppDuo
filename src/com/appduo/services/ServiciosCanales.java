@@ -6,7 +6,7 @@ import android.content.Context;
 
 import com.appduo.modelo.Canal;
 
-public interface ServiciosCanales {
+public interface ServiciosCanales  {
 	/**
 	 * Método que genera el listado de canales de la base de datos.
 	 * 

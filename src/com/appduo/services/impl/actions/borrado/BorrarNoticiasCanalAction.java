@@ -30,7 +30,7 @@ public class BorrarNoticiasCanalAction {
 		// Compararlas con respecto a la fecha determinada
 		// Si son antiguas, añadirlas para borrarlas.
 		for (Noticia noticia : noticias) {
-			if (noticia.getFecha() < this.fecha)
+			if (noticia.getFecha() > this.fecha)
 				noticiasABorrar.add(noticia);
 		}
 		// Borrar las noticias (si hay alguna)
