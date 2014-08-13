@@ -14,18 +14,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="36dp"
         android:text="@string/boton_iniciar_descarga" />
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/botonIniciarDescarga"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="54dp"
-        android:src="@drawable/ic_launcher" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/uniovi" />
 
     <TextView
         android:id="@+id/textView1"
@@ -33,7 +32,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="44dp"
         android:text="@string/texto_descarga_inicial"
         android:textSize="20dp" />
 

@@ -1,5 +1,6 @@
 package com.appduo;
 
+import java.util.List;
 import java.util.Locale;
 
 import android.app.ActionBar;
@@ -7,6 +8,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -15,6 +17,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+
+import com.appduo.actividades.ActivityDetallesNoticia;
+import com.appduo.modelo.Canal;
+import com.appduo.modelo.Noticia;
+import com.appduo.services.factoria.ServicesFactory;
 
 public class MainActivity extends Activity implements ActionBar.TabListener {
 
@@ -130,7 +142,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 		@Override
 		public int getCount() {
 			// Show 3 total pages.
-			return 3;
+			return 6;
 		}
 
 		@Override
@@ -143,6 +155,12 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 				return getString(R.string.title_section2).toUpperCase(l);
 			case 2:
 				return getString(R.string.title_section3).toUpperCase(l);
+			case 3:
+				return getString(R.string.title_section4).toUpperCase(l);
+			case 4:
+				return getString(R.string.title_section5).toUpperCase(l);
+			case 5:
+				return getString(R.string.title_section6).toUpperCase(l);
 			}
 			return null;
 		}
@@ -175,8 +193,42 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
-					false);
+			View rootView = inflater.inflate(R.layout.fragment_main, container,	false);
+			ListView dummyListView = (ListView) rootView.findViewById(R.id.listNoticias);
+			
+			//Coge el id del canal que se presentará
+			int idCanal = getArguments().getInt(ARG_SECTION_NUMBER);
+			Canal canal = new Canal();
+			canal.setIdCanal(idCanal);
+			//recoge las noticias
+			List<Noticia> noticias =  ServicesFactory.crearServicioNoticias().generarListadoNoticiasCanal(getActivity(),canal);
+			//Establece el array de objetos entrada como el adaptador de la lista.
+			ArrayAdapter<Noticia> list_adapter = new ArrayAdapter<Noticia>(getActivity(), android.R.layout.simple_list_item_1, noticias);
+			dummyListView.setAdapter(list_adapter);
+			
+			//Añade el listener a la lista
+			//Define la ventana 'detalle' que se mostrará al pulsar una noticia brevemente
+			dummyListView.setOnItemClickListener(new OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1,	final int pos, long arg3) {	
+					ListView lv = (ListView) getView().findViewById(R.id.listNoticias);
+					ListAdapter la = lv.getAdapter();
+					Noticia[] noticias = new Noticia[la.getCount()];
+					for (int i = 0; i < la.getCount(); i++)
+						noticias[i] = (Noticia) la.getItem(i);
+					
+					//Lanzar el intent y pasar parametros
+					Intent i = new Intent(getActivity(), ActivityDetallesNoticia.class);
+			        i.putExtra("detalles_noticia", noticias[pos].getTextoNoticia());
+			        i.putExtra("titulo_noticia", noticias[pos].getTitulo());
+			        i.putExtra("fecha_noticia", noticias[pos].getFecha());
+			        i.putExtra("origen_noticia", noticias[pos].getOrigen());
+			        startActivity(i);
+
+				}		
+			});
+			
+			
 			return rootView;
 		}
 	}

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">AppDuo</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-    
+    <string name="app_name">AppDuo_Uniovi</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="title_activity_main">AppDuo_Uniovi</string>
+
+    <!-- Secciones -->
+    <string name="title_section1">Actos</string>
+    <string name="title_section2">Anuncios</string>
+    <string name="title_section3">Becas</string>
+    <string name="title_section4">Boletines</string>
+    <string name="title_section5">Convocatorias</string>
+    <string name="title_section6">Otros</string>
+
     <!-- Strings para la pantalla de descarga inicial -->
     <string name="boton_iniciar_descarga">Iniciar descarga</string>
     <string name="texto_descarga_inicial">Bienvenido a AppDuo. Para empezar, es necesario descargar unos datos.

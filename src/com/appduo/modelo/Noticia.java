@@ -81,7 +81,7 @@ public class Noticia {
 
 	@Override
 	public String toString() {
-		return "Noticia [titulo=" + titulo + "]";
+		return titulo;
 	}
 
 }
