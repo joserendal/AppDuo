@@ -5,7 +5,10 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -42,6 +45,9 @@ public class ActivityBienvenidaInicial extends Activity {
 				new MyDownloadTask().execute("");
 			}
 		});
+		
+		
+		
 
 		// Si la base de datos no está vacia, hay que cambiar a
 		// la otra actividad.
@@ -50,10 +56,32 @@ public class ActivityBienvenidaInicial extends Activity {
 		if (noticias != null) {
 			Intent i = new Intent(this, MainActivity.class);
 			startActivity(i);
-			this.finish();
-			
+			this.finish();			
+		}
+		
+		//si hay que descargar noticias, comprobar que esté conectado a internet
+		boolean hayInternet = isOnline();
+		if(!hayInternet)
+		{
+			new DialogoNoHayInternet().show(getFragmentManager(), CONNECTIVITY_SERVICE);
 		}
 	}
+	
+
+	
+	/**
+	 * Método que comprueba si hay conexión a internet en el dispositivo
+	 * @return
+	 */
+	private boolean isOnline() {
+	    ConnectivityManager cm =  (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	    if (netInfo != null && netInfo.isConnected()) {
+	        return true;
+	    }
+	    return false;
+	}
+
 
 	/**
 	 * Método que crea la barra de progreso. Se muestra un mensaje y se irá
