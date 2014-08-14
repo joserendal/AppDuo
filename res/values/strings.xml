@@ -18,4 +18,8 @@
     <string name="texto_descarga_inicial">Bienvenido a AppDuo. Para empezar, es necesario descargar unos datos.
         La descarga tardará unos minutos. </string>
 
+    <!-- Menús -->
+    <string name="action_voz">Voz</string>
+    <string name="action_ajustes">Ajustes</string>
+
 </resources>
