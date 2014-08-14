@@ -15,9 +15,7 @@ import org.w3c.dom.NodeList;
 import com.appduo.modelo.Canal;
 import com.appduo.modelo.Noticia;
 
-/**
- * Created by JoseE on 28/06/2014.
- */
+
 public class UnioviRssReader {
 	
 	private Canal canal;

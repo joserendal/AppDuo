@@ -5,11 +5,16 @@ import java.util.Locale;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -26,6 +31,8 @@ import android.widget.ListView;
 import com.appduo.actividades.ActivityDetallesNoticia;
 import com.appduo.modelo.Canal;
 import com.appduo.modelo.Noticia;
+import com.appduo.segundoplano.BorradoReceiver;
+import com.appduo.segundoplano.DescargaReceiver;
 import com.appduo.services.factoria.ServicesFactory;
 
 public class MainActivity extends Activity implements ActionBar.TabListener {
@@ -82,6 +89,54 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
+		// Lanzar servicios en segundo plano
+		lanzarServicios();
+	}
+
+	/**
+	 * Este método lanzará todos los servicios en segundo plano, que trabajarán
+	 * de forma autónoma en la aplicación. Estos servicios son: el de descarga
+	 * de datos, y el de limpieza de la base de datos.
+	 */
+	private void lanzarServicios() {
+		//Tiempo de ejecución de los servicios
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences( this );	
+		int horas = pref.getInt("pref_key_intervalo_actualizacion", 3);
+		long tiempo =  (long) (horas*3600*1000);
+		
+		//cancelar alarmas pendientes
+		cancelarAlarmas();
+		
+		//Inicio del servicio de borrado y programación de la alarma	
+		Intent myIntentBorrado = new Intent(MainActivity.this, BorradoReceiver.class);
+	    PendingIntent pendingIntentBorrado = PendingIntent.getBroadcast(MainActivity.this, 0, myIntentBorrado,0);
+	     
+	    AlarmManager alarmManagerBorrado = (AlarmManager)getSystemService(ALARM_SERVICE);
+	    //el servicio arrancará en media hora y se repite cada 12 horas
+	    alarmManagerBorrado.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (30*60*1000),
+	    		 12*3600*1000, pendingIntentBorrado);
+		
+	    //Inicio del servicio de descarga y programación de la alarma	    
+		Intent myIntent = new Intent(MainActivity.this, DescargaReceiver.class);
+	    PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, myIntent,0);
+	     
+	    AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+	    //el servicio arrancará en una hora ya se repite segun lo pida el usuario
+	    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (60*60*1000), tiempo , pendingIntent);
+	}
+
+	private void cancelarAlarmas() {
+		// cancelar alarma borrado
+		AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+		Intent myIntentBorrado = new Intent(this, BorradoReceiver.class);
+		PendingIntent pendingIntentBorrado = PendingIntent.getBroadcast(this,0, myIntentBorrado, 0);
+		alarmManager.cancel(pendingIntentBorrado);
+
+		// cancelar alarma de descarga
+		Intent myIntentDescarga = new Intent(this, DescargaReceiver.class);
+		PendingIntent pendingIntentDescarga = PendingIntent.getBroadcast(this,0, myIntentDescarga, 0);
+		alarmManager.cancel(pendingIntentDescarga);
+
 	}
 
 	@Override
@@ -193,42 +248,52 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,	false);
-			ListView dummyListView = (ListView) rootView.findViewById(R.id.listNoticias);
-			
-			//Coge el id del canal que se presentará
+			View rootView = inflater.inflate(R.layout.fragment_main, container,
+					false);
+			ListView dummyListView = (ListView) rootView
+					.findViewById(R.id.listNoticias);
+
+			// Coge el id del canal que se presentará
 			int idCanal = getArguments().getInt(ARG_SECTION_NUMBER);
 			Canal canal = new Canal();
 			canal.setIdCanal(idCanal);
-			//recoge las noticias
-			List<Noticia> noticias =  ServicesFactory.crearServicioNoticias().generarListadoNoticiasCanal(getActivity(),canal);
-			//Establece el array de objetos entrada como el adaptador de la lista.
-			ArrayAdapter<Noticia> list_adapter = new ArrayAdapter<Noticia>(getActivity(), android.R.layout.simple_list_item_1, noticias);
+			// recoge las noticias
+			List<Noticia> noticias = ServicesFactory.crearServicioNoticias()
+					.generarListadoNoticiasCanal(getActivity(), canal);
+			// Establece el array de objetos entrada como el adaptador de la
+			// lista.
+			ArrayAdapter<Noticia> list_adapter = new ArrayAdapter<Noticia>(
+					getActivity(), android.R.layout.simple_list_item_1,
+					noticias);
 			dummyListView.setAdapter(list_adapter);
-			
-			//Añade el listener a la lista
-			//Define la ventana 'detalle' que se mostrará al pulsar una noticia brevemente
+
+			// Añade el listener a la lista
+			// Define la ventana 'detalle' que se mostrará al pulsar una noticia
+			// brevemente
 			dummyListView.setOnItemClickListener(new OnItemClickListener() {
 				@Override
-				public void onItemClick(AdapterView<?> arg0, View arg1,	final int pos, long arg3) {	
-					ListView lv = (ListView) getView().findViewById(R.id.listNoticias);
+				public void onItemClick(AdapterView<?> arg0, View arg1,
+						final int pos, long arg3) {
+					ListView lv = (ListView) getView().findViewById(
+							R.id.listNoticias);
 					ListAdapter la = lv.getAdapter();
 					Noticia[] noticias = new Noticia[la.getCount()];
 					for (int i = 0; i < la.getCount(); i++)
 						noticias[i] = (Noticia) la.getItem(i);
-					
-					//Lanzar el intent y pasar parametros
-					Intent i = new Intent(getActivity(), ActivityDetallesNoticia.class);
-			        i.putExtra("detalles_noticia", noticias[pos].getTextoNoticia());
-			        i.putExtra("titulo_noticia", noticias[pos].getTitulo());
-			        i.putExtra("fecha_noticia", noticias[pos].getFecha());
-			        i.putExtra("origen_noticia", noticias[pos].getOrigen());
-			        startActivity(i);
 
-				}		
+					// Lanzar el intent y pasar parametros
+					Intent i = new Intent(getActivity(),
+							ActivityDetallesNoticia.class);
+					i.putExtra("detalles_noticia",
+							noticias[pos].getTextoNoticia());
+					i.putExtra("titulo_noticia", noticias[pos].getTitulo());
+					i.putExtra("fecha_noticia", noticias[pos].getFecha());
+					i.putExtra("origen_noticia", noticias[pos].getOrigen());
+					startActivity(i);
+
+				}
 			});
-			
-			
+
 			return rootView;
 		}
 	}

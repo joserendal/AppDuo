@@ -7,9 +7,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-/**
- * Created by JoseE on 28/06/2014.
- */
+
 public class UnioviWebReader {
 
     private String enlace;

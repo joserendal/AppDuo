@@ -45,9 +45,6 @@ public class ActivityBienvenidaInicial extends Activity {
 				new MyDownloadTask().execute("");
 			}
 		});
-		
-		
-		
 
 		// Si la base de datos no está vacia, hay que cambiar a
 		// la otra actividad.
@@ -56,32 +53,29 @@ public class ActivityBienvenidaInicial extends Activity {
 		if (noticias != null) {
 			Intent i = new Intent(this, MainActivity.class);
 			startActivity(i);
-			this.finish();			
+			this.finish();
 		}
-		
-		//si hay que descargar noticias, comprobar que esté conectado a internet
+
+		// si hay que descargar noticias, comprobar que esté conectado a
+		// internet
 		boolean hayInternet = isOnline();
-		if(!hayInternet)
-		{
-			new DialogoNoHayInternet().show(getFragmentManager(), CONNECTIVITY_SERVICE);
+		if (!hayInternet) {
+			new DialogoNoHayInternet().show(getFragmentManager(),
+					CONNECTIVITY_SERVICE);
 		}
 	}
-	
 
-	
 	/**
-	 * Método que comprueba si hay conexión a internet en el dispositivo
-	 * @return
+	 * Método que comprueba si hay conexión a internet en el dispositivo.
 	 */
 	private boolean isOnline() {
-	    ConnectivityManager cm =  (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
-	    if (netInfo != null && netInfo.isConnected()) {
-	        return true;
-	    }
-	    return false;
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		if (netInfo != null && netInfo.isConnected()) {
+			return true;
+		}
+		return false;
 	}
-
 
 	/**
 	 * Método que crea la barra de progreso. Se muestra un mensaje y se irá
@@ -145,8 +139,10 @@ public class ActivityBienvenidaInicial extends Activity {
 		 */
 		@Override
 		protected String doInBackground(String... strings) {
-			//Se van a descargar los datos
-			ServicesFactory.crearServicioDescarga().iniciarServicioDescargaNoticias(getApplicationContext(), pDialog);
+			// Se van a descargar los datos
+			ServicesFactory.crearServicioDescarga()
+					.iniciarServicioDescargaNoticias(getApplicationContext(),
+							pDialog);
 			return null;
 		}
 
@@ -156,7 +152,8 @@ public class ActivityBienvenidaInicial extends Activity {
 			// Cuando se acaba la descarga, desaparece la barra
 			dismissDialog(progress_bar_type);
 			// Se cambia la actividad principal
-			Intent i = new Intent(ActivityBienvenidaInicial.this,MainActivity.class);
+			Intent i = new Intent(ActivityBienvenidaInicial.this,
+					MainActivity.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(i);
 			ActivityBienvenidaInicial.this.finish();
