@@ -136,9 +136,7 @@ public class ActivityBienvenidaInicial extends Activity {
 		@Override
 		protected String doInBackground(String... strings) {
 			// Se van a descargar los datos
-			ServicesFactory.crearServicioDescarga()
-					.iniciarServicioDescargaNoticias(getApplicationContext(),
-							pDialog);
+			ServicesFactory.crearServicioDescarga().iniciarServicioDescargaNoticias(getApplicationContext(),pDialog, true);
 			return null;
 		}
 
@@ -148,8 +146,7 @@ public class ActivityBienvenidaInicial extends Activity {
 			// Cuando se acaba la descarga, desaparece la barra
 			dismissDialog(progress_bar_type);
 			// Se cambia la actividad principal
-			Intent i = new Intent(ActivityBienvenidaInicial.this,
-					MainActivity.class);
+			Intent i = new Intent(ActivityBienvenidaInicial.this,MainActivity.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(i);
 			ActivityBienvenidaInicial.this.finish();

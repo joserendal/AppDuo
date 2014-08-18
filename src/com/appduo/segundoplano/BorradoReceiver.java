@@ -15,8 +15,6 @@ public class BorradoReceiver extends BroadcastReceiver {
 		//arrancar el servicio
 		Intent servicio = new Intent(context, ServicioBorrado.class);
 		context.startService(servicio);
-		//cuando acabe la ejecución parar
-		context.stopService(servicio);
 	}
 
 }

@@ -121,7 +121,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 	    PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, myIntent,0);
 	     
 	    AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-	    //el servicio arrancará en una hora ya se repite segun lo pida el usuario
+	    //el servicio arrancará en una hora ya se repite segun lo pida el usuario	//(60*60*1000)
 	    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (60*60*1000), tiempo , pendingIntent);
 	}
 

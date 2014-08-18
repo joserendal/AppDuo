@@ -11,6 +11,6 @@ public interface ServicioDescarga
 	 * @param context
 	 * @param pDialog 
 	 */
-	public void iniciarServicioDescargaNoticias(Context context, ProgressDialog pDialog);
+	public void iniciarServicioDescargaNoticias(Context context, ProgressDialog pDialog, boolean primeraDescarga);
 
 }

@@ -21,11 +21,13 @@ public class UnioviRssReader {
 	private Canal canal;
 	private List<Noticia> noticias;
 	private Long idUltimaNoticia;
+	private boolean primeraDescarga;
 
-	public UnioviRssReader(Canal canal, Long idUltimaNoticia) {
+	public UnioviRssReader(Canal canal, Long idUltimaNoticia, boolean primeraDescarga) {
 		this.canal = canal;
 		this.noticias = new ArrayList<Noticia>();
 		this.idUltimaNoticia = idUltimaNoticia;
+		this.primeraDescarga = primeraDescarga;
 	}
 
 	/**
@@ -56,7 +58,14 @@ public class UnioviRssReader {
 	 *            - Lista de nodos de la hoja RSS.
 	 */
 	private void iterateAndParseNodelist(NodeList items) {
-		for (int i = 0; i < items.getLength(); i++) {
+		int totalNoticias = 0;
+		if(primeraDescarga)
+			totalNoticias = 10;
+		else
+			totalNoticias = items.getLength();
+		
+		
+		for (int i = 0; i < totalNoticias; i++) {
 			Node n = items.item(i);
 			if (n.getNodeType() != Node.ELEMENT_NODE)
 				continue;

@@ -10,14 +10,16 @@ public class DescargarNoticiasCanalAction {
 
 	private Canal canal;
 	private Long idUltimaNoticia;
+	private boolean primeraDescarga;
 
-	public DescargarNoticiasCanalAction(Canal canal, Long idUltimaNoticia) {
+	public DescargarNoticiasCanalAction(Canal canal, Long idUltimaNoticia, boolean primeraDescarga) {
 		this.canal = canal;
 		this.idUltimaNoticia = idUltimaNoticia;
+		this.primeraDescarga = primeraDescarga;
 	}
 
 	public List<Noticia> ejecutar() {
-		UnioviRssReader uniovi = new UnioviRssReader(canal, idUltimaNoticia);
+		UnioviRssReader uniovi = new UnioviRssReader(canal, idUltimaNoticia, primeraDescarga);
 		uniovi.parse();
 		return uniovi.getNoticias();
 	}

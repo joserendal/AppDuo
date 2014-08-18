@@ -17,6 +17,9 @@ import com.appduo.services.impl.actions.descarga.DescargarNoticiasCanalAction;
 import com.appduo.services.impl.actions.noticias.AlmacenarNoticiasAction;
 
 public class ServicioDescargaImpl implements ServicioDescarga {
+	
+	
+	private static boolean primeraDescarga;
 
 	/*
 	 * (non-Javadoc)
@@ -26,7 +29,9 @@ public class ServicioDescargaImpl implements ServicioDescarga {
 	 * android.content.Context)
 	 */
 	@Override
-	public void iniciarServicioDescargaNoticias(Context context, ProgressDialog pDialog) {
+	public void iniciarServicioDescargaNoticias(Context context, ProgressDialog pDialog, boolean primeraDescarga) {
+		ServicioDescargaImpl.primeraDescarga = primeraDescarga;
+		
 		// recuperar los canales
 		List<Canal> canales = recuperarListadoCanales(context);
 
@@ -35,7 +40,10 @@ public class ServicioDescargaImpl implements ServicioDescarga {
 
 		// arrancar hilos y trabajar
 		for (Thread hilo : hilos)
+		{
 			hilo.start();
+			//parar dos segundos
+		}
 		
 		for (int i = 0; i < hilos.size(); i++)
 			try {
@@ -74,7 +82,7 @@ public class ServicioDescargaImpl implements ServicioDescarga {
 							.getNoticiasPersistenceService(context)
 							.getMaximoIdentificadorCanal(cln.getIdCanal());
 					//descargar las nuevas noticias
-					List<Noticia> noticias = new DescargarNoticiasCanalAction(cln, idUltimaNoticia).ejecutar();
+					List<Noticia> noticias = new DescargarNoticiasCanalAction(cln, idUltimaNoticia, primeraDescarga).ejecutar();
 					if (!noticias.isEmpty()) { //si hay nuevas noticias
 						//almacenar las noticias guardadas
 						new AlmacenarNoticiasAction(noticias, context).ejecutar();

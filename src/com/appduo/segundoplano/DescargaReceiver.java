@@ -16,8 +16,6 @@ public class DescargaReceiver extends BroadcastReceiver {
 		//arrancar el servicio
 		Intent servicio = new Intent(context, ServicioDescarga.class);
 		context.startService(servicio);
-		//cuando acabe la ejecución parar
-		context.stopService(servicio);
 	}
 
 }
