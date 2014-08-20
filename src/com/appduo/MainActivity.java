@@ -291,6 +291,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 					i.putExtra("detalles_noticia",
 							noticias[pos].getTextoNoticia());
 					i.putExtra("titulo_noticia", noticias[pos].getTitulo());
+					i.putExtra("enlace_noticia", noticias[pos].getEnlace());
 					i.putExtra("fecha_noticia", noticias[pos].getFecha());
 					i.putExtra("origen_noticia", noticias[pos].getOrigen());
 					startActivity(i);
