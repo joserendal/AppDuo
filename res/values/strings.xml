@@ -25,5 +25,23 @@
     <!-- Strings para la pantalla de detalles de la noticia -->
     <string name="boton_leer">Leer con Texto a Voz</string>
     <string name="boton_navegador">Ver en el navegador</string>
+    
+    <!-- Strings para la ventana de ajustes -->
+    <string name="datosAntiguos">Limpieza de datos antiguos</string>
+    <string name="detalleIntervaloBorrado">Configurar los dias que deben conservarse las noticias</string>
+    <string name="tituloIntervaloBorrado">Escoger intervalo de borrado</string>
+    <string name="tituloIntervalo">Escoger intervalo</string>
+    <string name="detalleLimpiarAhora">Ejecutar ahora la limpieza de noticias antiguas</string>
+    <string name="tituloLimpiarAhora">Limpiar ahora</string>
+    <string name="actualizacion">Descarga de nuevas noticias</string>
+    <string name="detalleIntervaloActualizacion">Configurar cuando deben descargarse nuevas noticias</string>
+    <string name="tituloIntervaloActualizacion">Escoger intervalo de descarga</string>
+    <string name="detalleActualizacionManual">Descargar nuevas noticias ahora</string>
+    <string name="tituloActualizacionManual">Actualizar ahora</string>
+    <string name="tituloAyuda">Ayuda</string>
+    <string name="detalleAcercaDe">Acerca de esta aplicación</string>
+    <string name="tituloAcercaDe">Acerca de AppDuo</string>
+    <string name="detalleAyuda">Ayuda con los comandos de voz de AppDuo</string>
+    <string name="aceptar">Aceptar</string>
 
 </resources>

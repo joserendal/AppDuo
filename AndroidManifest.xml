@@ -31,7 +31,12 @@
             android:label="@string/title_activity_main" >
         </activity>
         <activity
-            android:name="com.appduo.actividades.ActivityDetallesNoticia"
+            android:name=".actividades.NumberPickerPreference"
+            android:label="@string/tituloIntervalo"
+            android:theme="@android:style/Theme.Holo.Dialog" >
+        </activity>
+        <activity
+            android:name=".actividades.ActivityDetallesNoticia"
             android:label="@string/title_activity_main"
             android:parentActivityName=".MainActivity" >
             <meta-data
@@ -41,14 +46,14 @@
 
         <!-- Broadcast receiver -->
         <receiver
-            android:name="com.appduo.segundoplano.DescargaReceiver"
+            android:name=".segundoplano.DescargaReceiver"
             android:enabled="true" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.appduo.segundoplano.BorradoReceiver"
+            android:name=".segundoplano.BorradoReceiver"
             android:enabled="true" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -56,8 +61,13 @@
         </receiver>
 
         <!-- Servicios -->
-        <service android:name="com.appduo.segundoplano.ServicioDescarga" />
-        <service android:name="com.appduo.segundoplano.ServicioBorrado" />
+        <service android:name=".segundoplano.ServicioDescarga" />
+        <service android:name=".segundoplano.ServicioBorrado" />
+
+        <activity
+            android:name="com.appduo.actividades.AjustesActivity"
+            android:label="@string/title_activity_ajustes" >
+        </activity>
     </application>
 
 </manifest>

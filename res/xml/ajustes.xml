@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
+     xmlns:custom="http://schemas.android.com/apk/res-auto" 
+     android:key="ajustes" >       
+    
+    <PreferenceCategory 
+        android:title="@string/datosAntiguos"
+        android:key="pref_key_datosAntiguos">            
+  		<com.appduo.actividades.NumberPickerPreference
+  		    android:key="pref_key_intervalo_borrado" 
+    		android:summary="@string/detalleIntervaloBorrado"
+            android:title="@string/tituloIntervaloBorrado"
+	        android:dialogMessage="@string/detalleIntervaloBorrado"
+	        custom:min="1"
+	        android:max="100" 
+	        android:defaultValue="30"/>   	        
+  		 <Preference 
+      		android:key="pref_key_limpiar_ahora" 
+    		android:summary="@string/detalleLimpiarAhora"
+            android:title="@string/tituloLimpiarAhora"/>
+    </PreferenceCategory>
+    
+    <PreferenceCategory 
+        android:title="@string/actualizacion"
+        android:key="pref_key_actualizacion">         
+       <com.appduo.actividades.NumberPickerPreference
+      		android:key="pref_key_intervalo_actualizacion" 
+    		android:summary="@string/detalleIntervaloActualizacion"
+            android:title="@string/tituloIntervaloActualizacion"
+            android:dialogMessage="@string/detalleIntervaloActualizacion"
+	        custom:min="1"
+	        android:max="12" 
+	        android:defaultValue="4"/>        
+       <Preference 
+      		android:key="pref_key_actualizar_manualmente" 
+    		android:summary="@string/detalleActualizacionManual"
+            android:title="@string/tituloActualizacionManual"/>        
+    </PreferenceCategory>
+    
+    <PreferenceCategory 
+        android:title="@string/tituloAyuda"
+        android:key="pref_key_ayuda">         
+       <Preference 
+      		android:key="pref_key_acerca_de" 
+    		android:summary="@string/detalleAcercaDe"
+            android:title="@string/tituloAcercaDe"/>        
+       <Preference 
+      		android:key="pref_key_comandos_voz" 
+    		android:summary="@string/detalleAyuda"
+            android:title="@string/tituloAyuda"/>        
+    </PreferenceCategory>
+    
+</PreferenceScreen>
