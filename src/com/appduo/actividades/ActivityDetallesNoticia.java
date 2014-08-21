@@ -48,6 +48,8 @@ public class ActivityDetallesNoticia extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detalles_noticia);
+		
+		tts = new TextToSpeech(this, null);
 
 		// Recoger el texto de la noticiaa
 		recogerDatosIntent(getIntent().getExtras());
@@ -76,8 +78,7 @@ public class ActivityDetallesNoticia extends Activity {
 			@Override
 			public void onClick(View v) {
 				// activar voz
-				if (tts == null || !tts.isSpeaking()) {
-					tts = new TextToSpeech(getBaseContext(), null);
+				if ( !tts.isSpeaking()) {
 					botonVoz.setText("Parar la lectura");
 					tts.speak(textoTituloNoticia, TextToSpeech.QUEUE_ADD, null);
 					tts.speak(textoDetallesNoticia, TextToSpeech.QUEUE_ADD,
