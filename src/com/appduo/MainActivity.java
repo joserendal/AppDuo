@@ -29,6 +29,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.appduo.actividades.ActivityDetallesNoticia;
+import com.appduo.actividades.AjustesActivity;
 import com.appduo.modelo.Canal;
 import com.appduo.modelo.Noticia;
 import com.appduo.segundoplano.BorradoReceiver;
@@ -99,42 +100,52 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 	 * de datos, y el de limpieza de la base de datos.
 	 */
 	private void lanzarServicios() {
-		//Tiempo de ejecución de los servicios
-		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences( this );	
+		// Tiempo de ejecución de los servicios
+		SharedPreferences pref = PreferenceManager
+				.getDefaultSharedPreferences(this);
 		int horas = pref.getInt("pref_key_intervalo_actualizacion", 3);
-		long tiempo =  (long) (horas*3600*1000);
-		
-		//cancelar alarmas pendientes
+		long tiempo = (long) (horas * 3600 * 1000);
+
+		// cancelar alarmas pendientes
 		cancelarAlarmas();
-		
-		//Inicio del servicio de borrado y programación de la alarma	
-		Intent myIntentBorrado = new Intent(MainActivity.this, BorradoReceiver.class);
-	    PendingIntent pendingIntentBorrado = PendingIntent.getBroadcast(MainActivity.this, 0, myIntentBorrado,0);
-	     
-	    AlarmManager alarmManagerBorrado = (AlarmManager)getSystemService(ALARM_SERVICE);
-	    //el servicio arrancará en media hora y se repite cada 12 horas
-	    alarmManagerBorrado.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (30*60*1000),
-	    		 12*3600*1000, pendingIntentBorrado);
-		
-	    //Inicio del servicio de descarga y programación de la alarma	    
+
+		// Inicio del servicio de borrado y programación de la alarma
+		/*
+		 * Intent myIntentBorrado = new Intent(MainActivity.this,
+		 * BorradoReceiver.class); PendingIntent pendingIntentBorrado =
+		 * PendingIntent.getBroadcast(MainActivity.this, 0, myIntentBorrado,0);
+		 * 
+		 * AlarmManager alarmManagerBorrado =
+		 * (AlarmManager)getSystemService(ALARM_SERVICE); //el servicio
+		 * arrancará en media hora y se repite cada 12 horas
+		 * alarmManagerBorrado.setRepeating(AlarmManager.RTC_WAKEUP,
+		 * System.currentTimeMillis() + (30*60*1000), 12*3600*1000,
+		 * pendingIntentBorrado);
+		 */
+
+		// Inicio del servicio de descarga y programación de la alarma
 		Intent myIntent = new Intent(MainActivity.this, DescargaReceiver.class);
-	    PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, myIntent,0);
-	     
-	    AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-	    //el servicio arrancará en una hora ya se repite segun lo pida el usuario	//(60*60*1000)
-	    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (60*60*1000), tiempo , pendingIntent);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, myIntent, 0);
+
+		AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+		// el servicio arrancará en una hora ya se repite segun lo pida el
+		// usuario //(60*60*1000)
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,	System.currentTimeMillis() + (60 * 60 * 1000), tiempo,	pendingIntent);
 	}
 
 	private void cancelarAlarmas() {
 		// cancelar alarma borrado
-		AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+		AlarmManager alarmManager = (AlarmManager) this
+				.getSystemService(Context.ALARM_SERVICE);
 		Intent myIntentBorrado = new Intent(this, BorradoReceiver.class);
-		PendingIntent pendingIntentBorrado = PendingIntent.getBroadcast(this,0, myIntentBorrado, 0);
+		PendingIntent pendingIntentBorrado = PendingIntent.getBroadcast(this,
+				0, myIntentBorrado, 0);
 		alarmManager.cancel(pendingIntentBorrado);
 
 		// cancelar alarma de descarga
 		Intent myIntentDescarga = new Intent(this, DescargaReceiver.class);
-		PendingIntent pendingIntentDescarga = PendingIntent.getBroadcast(this,0, myIntentDescarga, 0);
+		PendingIntent pendingIntentDescarga = PendingIntent.getBroadcast(this,
+				0, myIntentDescarga, 0);
 		alarmManager.cancel(pendingIntentDescarga);
 
 	}
@@ -152,13 +163,17 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		switch(id)
-		{
-			case(R.id.action_ajustes): break;
-			case(R.id.action_voz): break;
-			default: break;
+		switch (id) {
+		case (R.id.action_ajustes):
+			Intent mIntent = new Intent(this, AjustesActivity.class);
+			startActivity(mIntent);
+			break;
+		case (R.id.action_voz):
+			break;
+		default:
+			break;
 		}
-		
+
 		return super.onOptionsItemSelected(item);
 	}
 

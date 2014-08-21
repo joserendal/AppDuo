@@ -25,7 +25,7 @@
     <!-- Strings para la pantalla de detalles de la noticia -->
     <string name="boton_leer">Leer con Texto a Voz</string>
     <string name="boton_navegador">Ver en el navegador</string>
-    
+
     <!-- Strings para la ventana de ajustes -->
     <string name="datosAntiguos">Limpieza de datos antiguos</string>
     <string name="detalleIntervaloBorrado">Configurar los dias que deben conservarse las noticias</string>
@@ -43,5 +43,25 @@
     <string name="tituloAcercaDe">Acerca de AppDuo</string>
     <string name="detalleAyuda">Ayuda con los comandos de voz de AppDuo</string>
     <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    
+    <!-- Strings mensajes ayuda -->
+    <string name="mensajeAyuda">Los comandos de voz de esta aplicación son: 
+ 	 \n Siguiente: para que la aplicación lea la siguiente noticia. 
+ 	 \n Anterior: para que la aplicación lea la noticia anterior.
+ 	 \n Detalle: para que la aplicación te dé mas información de una noticia.
+	\n Parar: terminará el control por voz de la aplicación.
+	\n Ayuda: para que la aplicación lea la ayuda de los comandos de voz.
+	\n Guardar: para que la aplicación guarde una noticia.
+	\n Borrar: para que la aplicación borre una noticia.</string>
+	<string name="textoAcerdaDe">AppDuo - 2014. Está aplicación ha sido desarrollada dentro de la Universidad de Oviedo.</string>
+ 
+	<!-- otros avisos -->
+	<string name="mensajeAvisoLimpiarAhora">Se procederá al borrado de todas las noticias antiguas. \n ¿Desea continuar?</string> 
+ 	<string name="toastAvisoLimpiarAhora">Se borrarán las noticias antiguas ahora</string> 	
+ 	<string name="noSePudoCancelarAlarma"> No se pudo cancelar la alarma borrado. </string> 	
+ 	<string name="comprobaraNuevasNoticias"> Se comprobará si existen nuevas noticias ahora  </string>
+ 	<string name="noPudoCancelarAlarma"> No se pudo cancelar la alarma de descarga. </string>	
+ 	
 
 </resources>

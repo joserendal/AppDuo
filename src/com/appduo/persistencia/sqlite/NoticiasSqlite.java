@@ -29,8 +29,7 @@ public class NoticiasSqlite {
 		List<Noticia> noticias = new ArrayList<Noticia>();
 
 		String[] args = new String[] { idCanal+"" };
-		Cursor cursor = db.rawQuery("SELECT * FROM noticias WHERE id_canal=? ",
-				args);
+		Cursor cursor = db.rawQuery("SELECT * FROM noticias WHERE id_canal=? ", args);
 
 		// Si no hay resultados, devolver null
 		if (cursor.getCount() == 0) {

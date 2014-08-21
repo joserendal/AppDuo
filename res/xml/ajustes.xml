@@ -28,8 +28,8 @@
     		android:summary="@string/detalleIntervaloActualizacion"
             android:title="@string/tituloIntervaloActualizacion"
             android:dialogMessage="@string/detalleIntervaloActualizacion"
-	        custom:min="1"
 	        android:max="12" 
+	         custom:min="1"
 	        android:defaultValue="4"/>        
        <Preference 
       		android:key="pref_key_actualizar_manualmente" 

@@ -8,13 +8,15 @@
 package com.appduo;
 
 public final class R {
-    public static final class array {
-        public static final int pref_example_list_titles=0x7f060000;
-        public static final int pref_example_list_values=0x7f060001;
-        public static final int pref_sync_frequency_titles=0x7f060002;
-        public static final int pref_sync_frequency_values=0x7f060003;
-    }
     public static final class attr {
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int min=0x7f010000;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -24,8 +26,8 @@ public final class R {
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
         public static final int acercade=0x7f020000;
@@ -35,16 +37,19 @@ public final class R {
         public static final int uniovi=0x7f020004;
     }
     public static final class id {
-        public static final int action_ajustes=0x7f09000d;
-        public static final int action_voz=0x7f09000e;
+        public static final int action_ajustes=0x7f09000f;
+        public static final int action_settings=0x7f090010;
+        public static final int action_voz=0x7f090011;
         public static final int botonIniciarDescarga=0x7f090000;
         public static final int botonLeer=0x7f090008;
         public static final int botonNavegador=0x7f090009;
         public static final int imageView1=0x7f090002;
         public static final int listNoticias=0x7f09000c;
+        public static final int number_picker=0x7f09000e;
         public static final int pager=0x7f09000a;
         public static final int scrollView1=0x7f090003;
         public static final int section_label=0x7f09000b;
+        public static final int textDummyEmpty=0x7f09000d;
         public static final int textView1=0x7f090001;
         public static final int textViewDetalleNoticias=0x7f090005;
         public static final int textViewFechaNoticia=0x7f090006;
@@ -55,60 +60,69 @@ public final class R {
         public static final int activity_bienvenida_inicial=0x7f030000;
         public static final int activity_detalles_noticia=0x7f030001;
         public static final int activity_main=0x7f030002;
-        public static final int ajustes=0x7f030003;
-        public static final int fragment_main=0x7f030004;
+        public static final int fragment_main=0x7f030003;
+        public static final int number_picker=0x7f030004;
     }
     public static final class menu {
         public static final int activity_bienvenida_inicial=0x7f080000;
         public static final int activity_detalles_noticia=0x7f080001;
-        public static final int main=0x7f080002;
+        public static final int ajustes=0x7f080002;
+        public static final int main=0x7f080003;
     }
     public static final class string {
-        public static final int action_ajustes=0x7f05000c;
-        public static final int action_settings=0x7f050001;
+        public static final int aceptar=0x7f06001e;
+        public static final int action_ajustes=0x7f06000c;
+        public static final int action_settings=0x7f060001;
         /**  Menús 
          */
-        public static final int action_voz=0x7f05000b;
-        public static final int app_name=0x7f050000;
+        public static final int action_voz=0x7f06000b;
+        public static final int actualizacion=0x7f060015;
+        public static final int app_name=0x7f060000;
         /**  Strings para la pantalla de descarga inicial 
          */
-        public static final int boton_iniciar_descarga=0x7f050009;
+        public static final int boton_iniciar_descarga=0x7f060009;
         /**  Strings para la pantalla de detalles de la noticia 
          */
-        public static final int boton_leer=0x7f05000d;
-        public static final int boton_navegador=0x7f05000e;
-        public static final int pref_default_display_name=0x7f050014;
-        public static final int pref_description_social_recommendations=0x7f050012;
-        /**  Example settings for Data & Sync 
+        public static final int boton_leer=0x7f06000d;
+        public static final int boton_navegador=0x7f06000e;
+        public static final int cancelar=0x7f06001f;
+        public static final int comprobaraNuevasNoticias=0x7f060025;
+        /**  Strings para la ventana de ajustes 
          */
-        public static final int pref_header_data_sync=0x7f050016;
-        /**  Strings related to Settings 
- Example General settings 
+        public static final int datosAntiguos=0x7f06000f;
+        public static final int detalleAcercaDe=0x7f06001b;
+        public static final int detalleActualizacionManual=0x7f060018;
+        public static final int detalleAyuda=0x7f06001d;
+        public static final int detalleIntervaloActualizacion=0x7f060016;
+        public static final int detalleIntervaloBorrado=0x7f060010;
+        public static final int detalleLimpiarAhora=0x7f060013;
+        /**  otros avisos 
          */
-        public static final int pref_header_general=0x7f050010;
-        /**  Example settings for Notifications 
+        public static final int mensajeAvisoLimpiarAhora=0x7f060022;
+        /**  Strings mensajes ayuda 
          */
-        public static final int pref_header_notifications=0x7f050019;
-        public static final int pref_ringtone_silent=0x7f05001c;
-        public static final int pref_title_add_friends_to_messages=0x7f050015;
-        public static final int pref_title_display_name=0x7f050013;
-        public static final int pref_title_new_message_notifications=0x7f05001a;
-        public static final int pref_title_ringtone=0x7f05001b;
-        public static final int pref_title_social_recommendations=0x7f050011;
-        public static final int pref_title_sync_frequency=0x7f050017;
-        public static final int pref_title_system_sync_settings=0x7f050018;
-        public static final int pref_title_vibrate=0x7f05001d;
-        public static final int texto_descarga_inicial=0x7f05000a;
-        public static final int title_activity_ajustes=0x7f05000f;
-        public static final int title_activity_main=0x7f050002;
+        public static final int mensajeAyuda=0x7f060020;
+        public static final int noPudoCancelarAlarma=0x7f060026;
+        public static final int noSePudoCancelarAlarma=0x7f060024;
+        public static final int textoAcerdaDe=0x7f060021;
+        public static final int texto_descarga_inicial=0x7f06000a;
+        public static final int title_activity_main=0x7f060002;
         /**  Secciones 
          */
-        public static final int title_section1=0x7f050003;
-        public static final int title_section2=0x7f050004;
-        public static final int title_section3=0x7f050005;
-        public static final int title_section4=0x7f050006;
-        public static final int title_section5=0x7f050007;
-        public static final int title_section6=0x7f050008;
+        public static final int title_section1=0x7f060003;
+        public static final int title_section2=0x7f060004;
+        public static final int title_section3=0x7f060005;
+        public static final int title_section4=0x7f060006;
+        public static final int title_section5=0x7f060007;
+        public static final int title_section6=0x7f060008;
+        public static final int tituloAcercaDe=0x7f06001c;
+        public static final int tituloActualizacionManual=0x7f060019;
+        public static final int tituloAyuda=0x7f06001a;
+        public static final int tituloIntervalo=0x7f060012;
+        public static final int tituloIntervaloActualizacion=0x7f060017;
+        public static final int tituloIntervaloBorrado=0x7f060011;
+        public static final int tituloLimpiarAhora=0x7f060014;
+        public static final int toastAvisoLimpiarAhora=0x7f060023;
     }
     public static final class style {
         /** 
@@ -138,4 +152,44 @@ public final class R {
          */
         public static final int AppTheme=0x7f070001;
     }
+    public static final class xml {
+        public static final int ajustes=0x7f040000;
+    }
+    public static final class styleable {
+        /**  note: to re-use an existing Android attribute not already used by the superclass, name should have prefix "android:" and do not define a format 
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #NumberPickerDialogPreference_android_max android:max}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberPickerDialogPreference_min com.appduo:min}</code></td><td></td></tr>
+           </table>
+           @see #NumberPickerDialogPreference_android_max
+           @see #NumberPickerDialogPreference_min
+         */
+        public static final int[] NumberPickerDialogPreference = {
+            0x01010136, 0x7f010000
+        };
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#max}
+          attribute's value can be found in the {@link #NumberPickerDialogPreference} array.
+          @attr name android:max
+        */
+        public static final int NumberPickerDialogPreference_android_max = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.appduo.R.attr#min}
+          attribute's value can be found in the {@link #NumberPickerDialogPreference} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.appduo:min
+        */
+        public static final int NumberPickerDialogPreference_min = 1;
+    };
 }

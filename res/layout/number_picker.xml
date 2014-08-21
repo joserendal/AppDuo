@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+ 
+    <TextView
+       android:id="@+id/textDummyEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </TextView>
+ 
     <NumberPicker
-        android:id="@+id/number_picker_preference"
+        android:id="@+id/number_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
-
-    <Button
-        android:id="@+id/apply_numberpicker_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/number_picker"
-        android:text="@string/aceptar" />
-
-</RelativeLayout>
+        android:layout_gravity="center_horizontal" /> 
+ 
+</LinearLayout>

@@ -117,6 +117,8 @@ public class ActivityDetallesNoticia extends Activity {
 		int id = item.getItemId();
 		switch (id) {
 		case (R.id.action_ajustes):
+			Intent mIntent = new Intent(this, AjustesActivity.class);
+			startActivity(mIntent);
 			break;
 		default:
 			break;
