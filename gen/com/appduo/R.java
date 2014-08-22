@@ -34,22 +34,23 @@ containing a value of this type.
         public static final int ic_launcher=0x7f020001;
         public static final int icono_llave=0x7f020002;
         public static final int icono_microfono=0x7f020003;
-        public static final int uniovi=0x7f020004;
+        public static final int navegador=0x7f020004;
+        public static final int stop=0x7f020005;
+        public static final int uniovi=0x7f020006;
     }
     public static final class id {
-        public static final int action_ajustes=0x7f09000f;
+        public static final int action_ajustes=0x7f09000d;
+        public static final int action_navegador=0x7f09000f;
         public static final int action_settings=0x7f090010;
-        public static final int action_voz=0x7f090011;
+        public static final int action_voz=0x7f09000e;
         public static final int botonIniciarDescarga=0x7f090000;
-        public static final int botonLeer=0x7f090008;
-        public static final int botonNavegador=0x7f090009;
         public static final int imageView1=0x7f090002;
-        public static final int listNoticias=0x7f09000c;
-        public static final int number_picker=0x7f09000e;
-        public static final int pager=0x7f09000a;
+        public static final int listNoticias=0x7f09000a;
+        public static final int number_picker=0x7f09000c;
+        public static final int pager=0x7f090008;
         public static final int scrollView1=0x7f090003;
-        public static final int section_label=0x7f09000b;
-        public static final int textDummyEmpty=0x7f09000d;
+        public static final int section_label=0x7f090009;
+        public static final int textDummyEmpty=0x7f09000b;
         public static final int textView1=0x7f090001;
         public static final int textViewDetalleNoticias=0x7f090005;
         public static final int textViewFechaNoticia=0x7f090006;
@@ -70,41 +71,42 @@ containing a value of this type.
         public static final int main=0x7f080003;
     }
     public static final class string {
-        public static final int aceptar=0x7f06001e;
+        public static final int aceptar=0x7f06001f;
         public static final int action_ajustes=0x7f06000c;
+        public static final int action_navegador=0x7f06000d;
         public static final int action_settings=0x7f060001;
         /**  Menús 
          */
         public static final int action_voz=0x7f06000b;
-        public static final int actualizacion=0x7f060015;
+        public static final int actualizacion=0x7f060016;
         public static final int app_name=0x7f060000;
         /**  Strings para la pantalla de descarga inicial 
          */
         public static final int boton_iniciar_descarga=0x7f060009;
         /**  Strings para la pantalla de detalles de la noticia 
          */
-        public static final int boton_leer=0x7f06000d;
-        public static final int boton_navegador=0x7f06000e;
-        public static final int cancelar=0x7f06001f;
-        public static final int comprobaraNuevasNoticias=0x7f060025;
+        public static final int boton_leer=0x7f06000e;
+        public static final int boton_navegador=0x7f06000f;
+        public static final int cancelar=0x7f060020;
+        public static final int comprobaraNuevasNoticias=0x7f060026;
         /**  Strings para la ventana de ajustes 
          */
-        public static final int datosAntiguos=0x7f06000f;
-        public static final int detalleAcercaDe=0x7f06001b;
-        public static final int detalleActualizacionManual=0x7f060018;
-        public static final int detalleAyuda=0x7f06001d;
-        public static final int detalleIntervaloActualizacion=0x7f060016;
-        public static final int detalleIntervaloBorrado=0x7f060010;
-        public static final int detalleLimpiarAhora=0x7f060013;
+        public static final int datosAntiguos=0x7f060010;
+        public static final int detalleAcercaDe=0x7f06001c;
+        public static final int detalleActualizacionManual=0x7f060019;
+        public static final int detalleAyuda=0x7f06001e;
+        public static final int detalleIntervaloActualizacion=0x7f060017;
+        public static final int detalleIntervaloBorrado=0x7f060011;
+        public static final int detalleLimpiarAhora=0x7f060014;
         /**  otros avisos 
          */
-        public static final int mensajeAvisoLimpiarAhora=0x7f060022;
+        public static final int mensajeAvisoLimpiarAhora=0x7f060023;
         /**  Strings mensajes ayuda 
          */
-        public static final int mensajeAyuda=0x7f060020;
-        public static final int noPudoCancelarAlarma=0x7f060026;
-        public static final int noSePudoCancelarAlarma=0x7f060024;
-        public static final int textoAcerdaDe=0x7f060021;
+        public static final int mensajeAyuda=0x7f060021;
+        public static final int noPudoCancelarAlarma=0x7f060027;
+        public static final int noSePudoCancelarAlarma=0x7f060025;
+        public static final int textoAcerdaDe=0x7f060022;
         public static final int texto_descarga_inicial=0x7f06000a;
         public static final int title_activity_main=0x7f060002;
         /**  Secciones 
@@ -115,14 +117,14 @@ containing a value of this type.
         public static final int title_section4=0x7f060006;
         public static final int title_section5=0x7f060007;
         public static final int title_section6=0x7f060008;
-        public static final int tituloAcercaDe=0x7f06001c;
-        public static final int tituloActualizacionManual=0x7f060019;
-        public static final int tituloAyuda=0x7f06001a;
-        public static final int tituloIntervalo=0x7f060012;
-        public static final int tituloIntervaloActualizacion=0x7f060017;
-        public static final int tituloIntervaloBorrado=0x7f060011;
-        public static final int tituloLimpiarAhora=0x7f060014;
-        public static final int toastAvisoLimpiarAhora=0x7f060023;
+        public static final int tituloAcercaDe=0x7f06001d;
+        public static final int tituloActualizacionManual=0x7f06001a;
+        public static final int tituloAyuda=0x7f06001b;
+        public static final int tituloIntervalo=0x7f060013;
+        public static final int tituloIntervaloActualizacion=0x7f060018;
+        public static final int tituloIntervaloBorrado=0x7f060012;
+        public static final int tituloLimpiarAhora=0x7f060015;
+        public static final int toastAvisoLimpiarAhora=0x7f060024;
     }
     public static final class style {
         /** 

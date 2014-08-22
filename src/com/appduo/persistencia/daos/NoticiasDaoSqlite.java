@@ -218,7 +218,13 @@ public class NoticiasDaoSqlite implements NoticiasDAO {
 		try {
 			for (Noticia not : noticia) {
 				NoticiasSqlite notsqlite = new NoticiasSqlite(db);
-				notsqlite.crearNoticia(not);
+				Noticia notLeida = null;
+				//mirar si existe la noticia
+				if(not.getIdNoticia() != null)
+					notLeida = notsqlite.getNoticiaPorIdentificador(not.getIdNoticia());
+				//si no existe, crearla
+				if(notLeida == null)				
+					notsqlite.crearNoticia(not);
 			}
 			// marca la transacción como correcta
 			db.setTransactionSuccessful();

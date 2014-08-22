@@ -2,9 +2,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.appduo.ActivityDetallesNoticia" >
 
-	<item android:id="@+id/action_ajustes"
-          android:icon="@drawable/icono_llave"
-          android:title="@string/action_ajustes"
-          android:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_ajustes"
+        android:icon="@drawable/icono_llave"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_ajustes"/>
+    <item
+        android:id="@+id/action_voz"
+        android:icon="@drawable/icono_microfono"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_voz"/>
+    <item
+        android:id="@+id/action_navegador"
+        android:icon="@drawable/navegador"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_navegador"/>
 
 </menu>

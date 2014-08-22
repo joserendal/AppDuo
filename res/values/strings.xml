@@ -19,8 +19,9 @@
         La descarga tardará unos minutos. </string>
 
     <!-- Menús -->
-    <string name="action_voz">Voz</string>
+    <string name="action_voz">Leer con Texto a Voz</string>
     <string name="action_ajustes">Ajustes</string>
+    <string name="action_navegador">Ver en el navegador</string>
 
     <!-- Strings para la pantalla de detalles de la noticia -->
     <string name="boton_leer">Leer con Texto a Voz</string>

@@ -28,9 +28,9 @@ public class NoticiasSqlite {
 	public List<Noticia> generarListadoNoticiasCanal(int idCanal) {
 		List<Noticia> noticias = new ArrayList<Noticia>();
 
-		String[] args = new String[] { idCanal+"" };
-		Cursor cursor = db.rawQuery("SELECT * FROM noticias WHERE id_canal=? ", args);
-
+		//String[] args = new String[] { idCanal+"" };
+		Cursor cursor = db.rawQuery("SELECT * FROM noticias WHERE id_canal=" + idCanal+ " ORDER BY id_noticia DESC", null);
+		
 		// Si no hay resultados, devolver null
 		if (cursor.getCount() == 0) {
 			cursor.close();
@@ -86,7 +86,7 @@ public class NoticiasSqlite {
 	public List<Noticia> generarListadoCompletoNoticias() {
 		List<Noticia> noticias = new ArrayList<Noticia>();
 
-		Cursor cursor = db.rawQuery("SELECT * FROM noticias", null);
+		Cursor cursor = db.rawQuery("SELECT * FROM noticias"+ " ORDER BY id_noticia DESC", null);
 
 		// Si no hay resultados, devolver null
 		if (cursor.getCount() == 0) {

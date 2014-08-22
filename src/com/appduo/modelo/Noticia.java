@@ -2,7 +2,7 @@ package com.appduo.modelo;
 
 public class Noticia {
 
-	private long idNoticia;
+	private Long idNoticia;
 	private String titulo;
 	private long fecha;
 	private String textoNoticia;
@@ -15,11 +15,11 @@ public class Noticia {
 		this.guardada = false;
 	}
 
-	public long getIdNoticia() {
+	public Long getIdNoticia() {
 		return idNoticia;
 	}
 
-	public void setIdNoticia(long idNoticia) {
+	public void setIdNoticia(Long idNoticia) {
 		this.idNoticia = idNoticia;
 	}
 

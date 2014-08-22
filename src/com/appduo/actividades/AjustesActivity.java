@@ -2,25 +2,29 @@ package com.appduo.actividades;
 
 import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.appduo.R;
 import com.appduo.segundoplano.BorradoReceiver;
-import com.appduo.segundoplano.DescargaReceiver;
+import com.appduo.services.factoria.ServicesFactory;
 
 @SuppressWarnings("deprecation")
 public class AjustesActivity extends PreferenceActivity {
+
+	// Barra que muestra el progreso de la descarga
+	private ProgressDialog pDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +53,7 @@ public class AjustesActivity extends PreferenceActivity {
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				actualizarAhora();
+				new MyDownloadTask().execute("");
 				return false;
 			}
 		});
@@ -149,10 +153,12 @@ public class AjustesActivity extends PreferenceActivity {
 	 */
 	private void lanzarServicioBorrado() {
 		// Recoge la alarma
-		AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+		AlarmManager alarmManager = (AlarmManager) this
+				.getSystemService(Context.ALARM_SERVICE);
 
 		Intent myIntentBorrado = new Intent(this, BorradoReceiver.class);
-		PendingIntent pendingIntentBorrado = PendingIntent.getBroadcast(this,0, myIntentBorrado, 0);
+		PendingIntent pendingIntentBorrado = PendingIntent.getBroadcast(this,
+				0, myIntentBorrado, 0);
 
 		try {
 			// Cancela la alarma existente
@@ -160,39 +166,68 @@ public class AjustesActivity extends PreferenceActivity {
 			// Programa una nueva (se ejecutará ahora mismo y quedará
 			// programada)
 			long millis = (long) (24 * 3600 * 1000);
-			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,	System.currentTimeMillis() + 10, millis,pendingIntentBorrado);
+			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+					System.currentTimeMillis() + 10, millis,
+					pendingIntentBorrado);
 		} catch (Exception e) {
 			Log.e("AppDuo.Ajustes", getString(R.string.noSePudoCancelarAlarma)
 					+ e.toString());
 		}
 	}
-
+	
 	/**
-	 * Método encargado de relanzar el servicio de descarga de nuevas noticias
-	 * bajo petición del usuario, volviendo a temporizarlo.
+	 * Método que crea la barra de progreso. Se muestra un mensaje y se irá
+	 * actualizando.
 	 */
-	private void actualizarAhora() {
-		// Recoge la alarma
-		AlarmManager alarmManager = (AlarmManager) this
-				.getSystemService(Context.ALARM_SERVICE);
-
-		Intent myIntent = new Intent(this, DescargaReceiver.class);
-		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,myIntent, 0);
-
-		// Cancela la alrma
-		try {
-			// Cancela la alarma existente
-			alarmManager.cancel(pendingIntent);
-			// Programa una nueva (se ejecutará ahora mismo y quedará
-			// programada)
-			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-			int tiempo = pref.getInt("pref_key_intervalo_actualizacion", 6);
-			long millis = (long) (tiempo * 3600 * 1000);
-			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,	System.currentTimeMillis() + 10, millis, pendingIntent);
-			Toast.makeText(this, R.string.comprobaraNuevasNoticias,	Toast.LENGTH_SHORT).show();
-		} catch (Exception e) {
-			Log.e("AppDuo.Ajustes", getString(R.string.noPudoCancelarAlarma)
-					+ e.toString());
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+		case 0:
+			pDialog = new ProgressDialog(this);
+			pDialog.setMessage("Descargando datos. Mantengase a la espera...");
+			pDialog.setIndeterminate(false);
+			pDialog.setMax(100);
+			pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			pDialog.setCancelable(false);
+			pDialog.show();
+			return pDialog;
+		default:
+			return null;
 		}
 	}
+
+	/******************************************************************************************************/
+
+	/**
+	 * Clase que realiza la descarga de noticias. Va conectada con la barra de
+	 * progreso horizontal, para mostrar el estado de la descarga.
+	 */
+	class MyDownloadTask extends AsyncTask<String, Integer, String> {
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			// enseña la barra de progreso
+			showDialog(0);
+		}
+
+		/**
+		 * Tarea a ejecutar en segundo plano. Se realiza la descarga y el
+		 * parseamiento inicial de datos.
+		 */
+		@Override
+		protected String doInBackground(String... strings) {
+			// Se van a descargar los datos
+			ServicesFactory.crearServicioDescarga().iniciarServicioDescargaNoticias(getApplicationContext(),pDialog, false);
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String file_url) {
+			// Cuando se acaba la descarga, desaparece la barra
+			dismissDialog(0);
+		}
+
+	}
+
 }

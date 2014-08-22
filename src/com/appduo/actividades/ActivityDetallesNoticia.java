@@ -11,9 +11,6 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.appduo.R;
@@ -26,6 +23,7 @@ public class ActivityDetallesNoticia extends Activity {
 	private Long fechaNoticia;
 	private Date fecha;
 	private String textoOrigenNoticia;
+	private Menu menu;
 	private static TextToSpeech tts;
 
 	/**
@@ -48,7 +46,7 @@ public class ActivityDetallesNoticia extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detalles_noticia);
-		
+
 		tts = new TextToSpeech(this, null);
 
 		// Recoger el texto de la noticiaa
@@ -71,41 +69,12 @@ public class ActivityDetallesNoticia extends Activity {
 		// origen de la noticia
 		TextView textViewOrigenNoticia = (TextView) findViewById(R.id.textViewOrigenNoticia);
 		textViewOrigenNoticia.setText(textoOrigenNoticia);
-
-		// Botones
-		final Button botonVoz = (Button) findViewById(R.id.botonLeer);
-		botonVoz.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// activar voz
-				if ( !tts.isSpeaking()) {
-					botonVoz.setText("Parar la lectura");
-					tts.speak(textoTituloNoticia, TextToSpeech.QUEUE_ADD, null);
-					tts.speak(textoDetallesNoticia, TextToSpeech.QUEUE_ADD,
-							null);
-				}
-				// parar voz
-				else {
-					tts.stop();
-					botonVoz.setText(R.string.boton_leer);
-				}
-			}
-		});
-
-		Button botonNavegador = (Button) findViewById(R.id.botonNavegador);
-		botonNavegador.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(Intent.ACTION_VIEW, Uri
-						.parse(enlaceNoticia));
-				startActivity(intent);
-			}
-		});
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
+		this.menu = menu;
 		getMenuInflater().inflate(R.menu.activity_detalles_noticia, menu);
 		return true;
 	}
@@ -117,6 +86,23 @@ public class ActivityDetallesNoticia extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		switch (id) {
+		case (R.id.action_voz):
+			// activar voz
+			if (!tts.isSpeaking()) {
+				tts.speak(textoTituloNoticia, TextToSpeech.QUEUE_ADD, null);
+				tts.speak(textoDetallesNoticia, TextToSpeech.QUEUE_ADD, null);
+				this.menu.findItem(R.id.action_voz).setIcon(R.drawable.stop);
+			}
+			// parar voz
+			else {
+				this.menu.findItem(R.id.action_voz).setIcon(R.drawable.icono_microfono);
+				tts.stop();
+			}
+			break;
+		case (R.id.action_navegador):
+			Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(enlaceNoticia));
+			startActivity(intent);
+			break;
 		case (R.id.action_ajustes):
 			Intent mIntent = new Intent(this, AjustesActivity.class);
 			startActivity(mIntent);
